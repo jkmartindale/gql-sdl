@@ -1,0 +1,34 @@
+{
+  "name": "gqlschema",
+  "version": "0.1.0",
+  "description": "CLI tool to pull the GraphQL schema (as GraphQL SDL or JSON) from a given endpoint with introspection enabled",
+  "keywords": ["cli", "graphql"],
+  "homepage": "https://github.com/jkmartindale/gqlschema#readme",
+  "bugs": "https://github.com/jkmartindale/gqlschema/issues",
+  "license": "MIT",
+  "author": "James Martindale (https://twitter.com/jkmartindale)",
+  "files": ["dist/**/*", "!*.tsbuildinfo"],
+  "main": "dist/index.js",
+  "bin": {
+    "gqlschema": "dist/index.js"
+  },
+  "repository": "github:jkmartindale/gqlschema",
+  "scripts": {
+    "build": "npx tsc",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "argparse": "^2.0.1",
+    "got": "^11.8.2",
+    "graphql": "^15.5.1"
+  },
+  "devDependencies": {
+    "@types/argparse": "^2.0.10",
+    "typescript": "^4.3.5"
+  },
+  "engines": {
+    "node": ">=15.10.0"
+  },
+  "type": "module",
+  "types": "dist/index.d.ts"
+}
