@@ -2,9 +2,8 @@
 
 import * as fs from 'fs'
 import got from 'got'
-import path from 'path'
 import { buildClientSchema, getIntrospectionQuery, IntrospectionQuery, printSchema } from 'graphql'
-import { ArgumentParser, HelpFormatter } from 'argparse'
+import { Action, ArgumentParser, HelpFormatter } from 'argparse'
 import { URL } from 'url'
 
 async function getIntrospectionData(endpoint: string): Promise<IntrospectionQuery> {
@@ -16,11 +15,11 @@ async function getIntrospectionData(endpoint: string): Promise<IntrospectionQuer
             json: { query: getIntrospectionQuery() },
             url: endpoint
         }).json()
-    
+
         return data;
 
     } catch (error) {
-        console.error(`Failed to connect to API endpoint: ${error.message}`)
+        console.error(`Failed to connect to API endpoint: ${error}`)
         process.exit(-1)
     }
 }
@@ -36,14 +35,26 @@ async function outputResult(data: string, file: fs.PathLike | fs.promises.FileHa
 // Define CLI and parse arguments
 // Chose argparse over meow because of automatic help generation and over yargs because the help messages for positional arguments are more helpful
 const parser = new ArgumentParser({
+    // I hate Python's idea of doing -s1 METAVAR, -s2 METAVAR, --long METAVAR in help listings
     formatter_class: class extends HelpFormatter {
-        constructor() {
-            super({
-                // Put -o, --output help on one line
-                max_help_position: 26,
-                // Must be specified when specifying other arguments
-                prog: path.basename(process.argv.slice(1)[0]),
-            })
+        _format_action_invocation(action: Action) {
+            if (!action.option_strings.length) {
+                let default_value = this._get_default_metavar_for_positional(action)
+                let metavar = this._metavar_formatter(action, default_value)(1)[0]
+                return metavar
+            }
+
+            // if the Optional doesn't take a value, format is:
+            //    -s, --long
+            if (action.nargs === 0) {
+                return action.option_strings.join(', ')
+            }
+
+            // if the Optional takes a value, format is:
+            //    -s, --long ARGS
+            let default_value = this._get_default_metavar_for_optional(action)
+            let args_string = this._format_args(action, default_value)
+            return `${action.option_strings.join(', ')} ${args_string}`
         }
     }
 })
