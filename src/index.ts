@@ -10,14 +10,18 @@ async function getIntrospectionData(endpoint: string): Promise<IntrospectionQuer
     // Ensure URL is valid
     try {
         new URL(endpoint)
+    } catch (error) {
+        console.error('Invalid URL')
+        process.exit(-2)
+    }
+
+    try {
         const { data } = await got.post({
             http2: true,
             json: { query: getIntrospectionQuery() },
             url: endpoint
         }).json()
-
-        return data;
-
+        return data
     } catch (error) {
         console.error(`Failed to connect to API endpoint: ${error}`)
         process.exit(-1)
