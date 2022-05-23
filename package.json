@@ -21,7 +21,8 @@
   "repository": "github:jkmartindale/gqlschema",
   "scripts": {
     "build": "npx tsc",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "argparse": "^2.0.1",
