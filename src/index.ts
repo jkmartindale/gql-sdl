@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+// Chose argparse over meow because of automatic help generation and over yargs because the help messages for positional arguments are more helpful
 import { Action, ArgumentParser, HelpFormatter, Namespace } from 'argparse'
 import * as fs from 'fs'
 import got from 'got'
@@ -46,7 +47,6 @@ const CustomHelpFormatter = class extends HelpFormatter {
     }
 }
 
-// Chose argparse over meow because of automatic help generation and over yargs because the help messages for positional arguments are more helpful
 const parser = new class extends ArgumentParser {
     constructor() {
         super({
@@ -118,7 +118,6 @@ introspectionGroup.add_argument('-I', '--input-value-deprecation', {
 let args = parser.parse_args()
 
 async function getQueryData(endpoint: string, query: string): Promise<IntrospectionQuery> {
-    // Ensure URL is valid
     try {
         new URL(endpoint)
     } catch (error) {
@@ -134,7 +133,7 @@ async function getQueryData(endpoint: string, query: string): Promise<Introspect
         }).json()
         return data
     } catch (error) {
-        console.error(`Failed to connect to API endpoint: ${error}`)
+        console.error(`Failed to connect to API endpoint.\n${error}`)
         process.exit(-1)
     }
 }
@@ -147,7 +146,7 @@ async function outputResult(data: string, file: fs.PathLike | fs.promises.FileHa
     }
 }
 
-// Grab the JSON first (needed to generate SDL) and write it out if needed
+// Grab the JSON first (needed to generate SDL) and write it out if requested
 const introspectionData = await getQueryData(args.endpoint, getIntrospectionQuery(args))
 if (args.json) {
     const json = JSON.stringify(introspectionData) + '\n'

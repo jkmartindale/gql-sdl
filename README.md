@@ -40,7 +40,7 @@ gqlschema supports introspection options provided by [GraphQL.js](https://github
 
 ### Full Usage
 
-```shell
+```
 $ gqlschema --help
 usage: gqlschema [-h] [-s] [-j] [-o FILE] [-N] [-D] [-R] [-S] [-I] endpoint
 
