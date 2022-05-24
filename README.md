@@ -36,12 +36,13 @@ type Root {
 
 Output can also be saved to a file with the `-o FILE` option. If you specify both `--json` and `--sdl`, `FILE` will be used as a base filename and output will be saved to `FILE.json` and `FILE.graphql` accordingly.
 
-gqlschema supports introspection options provided by [GraphQL.js](https://github.com/graphql/graphql-js). These flags may not be compatible with all GraphQL servers (especially `-U` and `-I`) and could cause the introspection to fail.
+gqlschema supports introspection options provided by [GraphQL.js](https://github.com/graphql/graphql-js). These flags may not be compatible with all GraphQL servers (especially `--specified-by-url` and `--input-value-deprecation`) and could cause the introspection to fail.
 
 ### Full Usage
 
-```
-usage: gqlschema [-h] [-s] [-j] [-o FILE] [-D] [-U] [-R] [-S] [-I] endpoint
+```shell
+$ gqlschema --help
+usage: gqlschema [-h] [-s] [-j] [-o FILE] [-N] [-D] [-R] [-S] [-I] endpoint
 
 positional arguments:
   endpoint                       GraphQL endpoint with introspection enabled
@@ -53,9 +54,9 @@ optional arguments:
   -o, --output FILE              output to the specified file instead of stdout
 
 introspection options:
-  -D, --no-descriptions          don't include descriptions in the introspection result
-  -U, --specified-by-url         include `specifiedByURL` in the introspection result
-  -R, --directive-is-repeatable  include `isRepeatable` flag on directives
-  -S, --schema-description       include `description` field on schema
-  -I, --input-value-deprecation  whether target GraphQL server supports deprecation of input values
+  -N, --no-descriptions          don't include descriptions in the introspection result
+  -D, --schema-description       include `description` field on schema
+  -R, --repeatable-directives    include `isRepeatable` flag on directives
+  -S, --specified-by-url         include `specifiedByURL` in the introspection result
+  -I, --input-value-deprecation  query deprecation of input values
 ```

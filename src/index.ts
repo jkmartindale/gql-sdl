@@ -91,28 +91,28 @@ parser.add_argument('-o', '--output', {
     metavar: 'FILE',
 })
 const introspectionGroup = parser.add_argument_group({ title: 'introspection options' })
-introspectionGroup.add_argument('-D', '--no-descriptions', {
+introspectionGroup.add_argument('-N', '--no-descriptions', {
     action: 'store_false',
     help: "don't include descriptions in the introspection result",
 })
-introspectionGroup.add_argument('-U', '--specified-by-url', {
-    action: 'store_true',
-    help: 'include `specifiedByURL` in the introspection result',
-    dest: 'specifiedByUrl',
-})
-introspectionGroup.add_argument('-R', '--directive-is-repeatable', {
-    action: 'store_true',
-    help: 'include `isRepeatable` flag on directives',
-    dest: 'directiveIsRepeatable',
-})
-introspectionGroup.add_argument('-S', '--schema-description', {
+introspectionGroup.add_argument('-D', '--schema-description', {
     action: 'store_true',
     help: 'include `description` field on schema',
     dest: 'schemaDescription',
 })
+introspectionGroup.add_argument('-R', '--repeatable-directives', {
+    action: 'store_true',
+    help: 'include `isRepeatable` flag on directives',
+    dest: 'directiveIsRepeatable',
+})
+introspectionGroup.add_argument('-S', '--specified-by-url', {
+    action: 'store_true',
+    help: 'include `specifiedByURL` in the introspection result',
+    dest: 'specifiedByUrl',
+})
 introspectionGroup.add_argument('-I', '--input-value-deprecation', {
     action: 'store_true',
-    help: 'whether target GraphQL server supports deprecation of input values',
+    help: 'query deprecation of input values',
     dest: 'inputValueDeprecation',
 })
 let args = parser.parse_args()
