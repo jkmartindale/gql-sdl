@@ -1,13 +1,10 @@
 #!/usr/bin/env node
 
-// Chose argparse over meow because of automatic help generation and over yargs because the help messages for positional arguments are more helpful
 import * as fs from 'fs'
 import got from 'got'
 import { buildClientSchema, getIntrospectionQuery, IntrospectionQuery, printSchema } from 'graphql'
 import { URL } from 'url'
 import { parser } from './parser.js'
-
-let args = parser.parse_args()
 
 async function getQueryData(endpoint: string, query: string, headers?: any): Promise<IntrospectionQuery> {
     try {
@@ -38,6 +35,8 @@ async function outputResult(data: string, file: fs.PathLike | fs.promises.FileHa
         process.stdout.write(data)
     }
 }
+
+let args = parser.parse_args()
 
 // Grab the JSON first (needed to generate SDL) and write it out if requested
 const introspectionData = await getQueryData(args.endpoint, getIntrospectionQuery(args), args.headers)

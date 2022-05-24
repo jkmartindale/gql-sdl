@@ -1,6 +1,6 @@
 {
   "name": "gqlschema",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "CLI tool to pull the GraphQL schema (as GraphQL SDL or JSON) from a given endpoint with introspection enabled",
   "keywords": [
     "cli",
@@ -12,7 +12,7 @@
   "author": "James Martindale (https://twitter.com/jkmartindale)",
   "files": [
     "dist/**/*",
-    "!*.tsbuildinfo"
+    "!dist/*.tsbuildinfo"
   ],
   "main": "dist/index.js",
   "bin": {

@@ -1,3 +1,4 @@
+// Chose argparse over meow because of automatic help generation and over yargs because the help messages for positional arguments are more helpful
 import { Action, ArgumentParser, HelpFormatter, Namespace } from 'argparse'
 import * as path from 'path'
 
