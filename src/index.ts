@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import * as fs from 'fs'
-import got from 'got'
 import { buildClientSchema, getIntrospectionQuery, IntrospectionQuery, printSchema } from 'graphql'
 import { URL } from 'url'
 import { parser } from './parser.js'
@@ -14,17 +13,29 @@ async function getQueryData(endpoint: string, query: string, headers?: any): Pro
         process.exit(-2)
     }
 
+    let response;
     try {
-        const { data } = await got.post({
-            headers,
-            http2: true,
-            json: { query },
-            url: endpoint
-        }).json()
-        return data
+        response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json', ...headers },
+            body: JSON.stringify({ query }),
+        })
     } catch (error) {
         console.error(`Failed to connect to API endpoint.\n${error}`)
         process.exit(-1)
+    }
+
+    if (!response.ok) {
+        console.error(`Error response from server: [${response.status}] ${response.statusText}`)
+        process.exit(-3)
+    }
+
+    try {
+        const { data } = await response.json()
+        return data
+    } catch (error) {
+        console.error(`Error parsing server response.\n${error}`)
+        process.exit(-4)
     }
 }
 
