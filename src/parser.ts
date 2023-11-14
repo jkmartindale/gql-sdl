@@ -101,6 +101,11 @@ parser.add_argument('-o', '--output', {
     help: 'output to the specified file instead of stdout',
     metavar: 'FILE',
 })
+parser.add_argument('-v', '--version', {
+    action: 'version',
+    help: "show gql-sdl's version number and exit",
+    version: `gql-sdl ${process.env.npm_package_version}`,
+})
 const introspectionGroup = parser.add_argument_group({ title: 'introspection options' })
 introspectionGroup.add_argument('-N', '--no-descriptions', {
     action: 'store_false',

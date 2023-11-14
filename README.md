@@ -62,7 +62,7 @@ gql-sdl supports introspection options provided by [GraphQL.js](https://github.c
 
 ```
 $ gql-sdl --help
-usage: gql-sdl [-h] [-s] [-j] [-H HEADER] [-o FILE] [-N] [-D] [-R] [-S] [-I] endpoint
+usage: gql-sdl [-h] [-s] [-j] [-H HEADER] [-o FILE] [-v] [-N] [-D] [-R] [-S] [-I] endpoint
 
 positional arguments:
   endpoint                       GraphQL endpoint with introspection enabled
@@ -73,6 +73,7 @@ optional arguments:
   -j, --json                     download schema as JSON
   -H, --header HEADER            add HTTP request header (can be specified multiple times)
   -o, --output FILE              output to the specified file instead of stdout
+  -v, --version                  show gql-sdl's version number and exit
 
 introspection options:
   -N, --no-descriptions          don't include descriptions in the introspection result
