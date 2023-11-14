@@ -40,8 +40,7 @@ Use the `-H HEADER` option to send headers (cookies, authorization, user agent, 
 
 ```shell
 $ gql-sdl https://api.github.com/graphql
-Failed to connect to API endpoint.
-HTTPError: Response code 401 (Unauthorized)
+Error response from server: [401] Unauthorized
 $ gql-sdl https://api.github.com/graphql -H "Authorization: Bearer ghp_[redacted]"
 directive @requiredCapabilities(requiredCapabilities: [String!]) on OBJECT | SCALAR | ARGUMENT_DEFINITION | INTERFACE | INPUT_OBJECT | FIELD_DEFINITION | ENUM | ENUM_VALUE | UNION | INPUT_FIELD_DEFINITION
 
