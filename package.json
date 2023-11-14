@@ -18,7 +18,10 @@
   "bin": {
     "gql-sdl": "dist/index.js"
   },
-  "repository": "github:jkmartindale/gql-sdl",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkmartindale/gql-sdl.git"
+  },
   "scripts": {
     "build": "npx tsc",
     "prepare": "npm run build",
